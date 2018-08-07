@@ -1,26 +1,27 @@
 package com.bank;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class User {
-   private String id= UUID.randomUUID().toString();
-   private String password;
-   private String fullName;
-   private String address;
-   private long accountNumber;
-   private String phoneNumber;
-   private String email;
-   private String secretQuestions;
-   private String answerForSecretQuestion;
 
+    private String id;
+    private String password;
+    private String fullName;
+    private String address;
+    private List<Account> accounts;
+    private String phoneNumber;
+    private String email;
+    private String secretQuestion;
+    private String answerForSecretQuestion;
 
-    public User(
-                String password,
+    public User(String password,
                 String fullName,
                 String address,
                 String phoneNumber,
                 String email,
-                String secretQuestions,
+                String secretQuestion,
                 String answerForSecretQuestion) {
 
         this.id = UUID.randomUUID().toString();
@@ -29,10 +30,32 @@ public class User {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.secretQuestions = secretQuestions;
+        this.secretQuestion = secretQuestion;
         this.answerForSecretQuestion = answerForSecretQuestion;
-}
+        this.accounts = new ArrayList<>();
+    }
 
+    public double totalAmountOfMoney (){
+        double sum=0;
+        for (Account account: accounts){
+            sum+=account.getBalance();
+
+        }
+
+        return sum;
+    }
+
+    public void addMoney(long accountId, double amountOfMoney){
+        for(Account account: accounts){
+            sum+=account.addMoney();
+
+        }
+
+    }
+    public void addNewAccount(String currency) {
+        Account newAccount = new Account(currency);
+        accounts.add(newAccount);
+    }
 
     public String getId() {
         return id;
@@ -66,14 +89,6 @@ public class User {
         this.address = address;
     }
 
-    public long getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(long accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -90,12 +105,12 @@ public class User {
         this.email = email;
     }
 
-    public String getSecretQuestions() {
-        return secretQuestions;
+    public String getSecretQuestion() {
+        return secretQuestion;
     }
 
-    public void setSecretQuestions(String secretQuestions) {
-        this.secretQuestions = secretQuestions;
+    public void setSecretQuestion(String secretQuestion) {
+        this.secretQuestion = secretQuestion;
     }
 
     public String getAnswerForSecretQuestion() {
@@ -113,11 +128,11 @@ public class User {
                 ", password='" + password + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", address='" + address + '\'' +
-                ", accountNumber=" + accountNumber +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
-                ", secretQuestions='" + secretQuestions + '\'' +
+                ", secretQuestion='" + secretQuestion + '\'' +
                 ", answerForSecretQuestion='" + answerForSecretQuestion + '\'' +
                 '}';
     }
+
 }
